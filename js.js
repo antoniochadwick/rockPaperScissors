@@ -1,23 +1,21 @@
-let theParent = document.querySelector("#container");
-theParent.addEventListener("click", getButton, false);
 
-function getButton(e) {
-	
-}
 
 //ask user to enter (papers, rock, scissors)
 function playerInput() {
-	let userPlay = document.querySelector("select");
-	var strUser = userPlay.options[userPlay.selectedIndex].text;
-	return strUser;
+	let userPlay = prompt("Paper, Rock, or  Scissors?").toLowerCase();
 
+	if (!(userPlay === "rock" || userPlay === "paper" || userPlay === "scissors")) {
+		return userPlay = prompt("please enter: Paper, Rock, or Scissors").toLowerCase();
+	}
+	return userPlay;
 }
 //function to allow computer to return (rock, papers, scissors)
 function computerPlay() {
 	let option = ["paper", "rock", "scissors"];
 	const randomOption = option[Math.floor(Math.random() * option.length)]
 	return randomOption;
- }
+
+}
 //takes user's play and compare with computer's play and determins the winner 
 function playRound(playerSelection, computerSelection) {
 	if (playerSelection === computerSelection) {
@@ -46,35 +44,36 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 //creates 5 rounds and count scores of each rounds
-// function game() {
-// 	let cs = 0;
-// 	let ps = 0;
+function game() {
+	let cs = 0;
+	let ps = 0;
 
-// 	for (let i = 1; i <= 5; i++) {
-// 		switch (playRound(playerInput(), computerPlay())) {
-// 			case "You lose":
-// 				cs += 1;
-// 				break;
-// 			case "You win":
-// 				ps += 1;
-// 				break;
-// 			default:
-// 		}
-// 	}	
+	for (let i = 1; i <= 5; i++) {
+		switch (playRound(playerInput(), computerPlay())) {
+			case "You lose":
+				cs += 1;
+				break;
+			case "You win":
+				ps += 1;
+				break;
+			default:
+		}
+	}	
 
-// 	function scoreCount() {
-// 		if (cs === ps) {
-// 			return "Its a tie";
-// 		}else if (cs > ps) {
-// 			return "Computer Won, Try again next time";
-// 		}else {
-// 			return "You Won, Congratulations!";
-// 		}
+	function scoreCount() {
+		if (cs === ps) {
+			return "Its a tie";
+		}else if (cs > ps) {
+			return "Computer Won, Try again next time";
+		}else {
+			return "You Won, Congratulations!";
+		}
 
-// 	}
-
-
-// 	console.log(`computer scores ${cs} and your score ${ps}`, scoreCount());
-// }
+	}
 
 
+	console.log(`computer scores ${cs} and your score ${ps}`, scoreCount());
+}
+
+
+console.log(game());
